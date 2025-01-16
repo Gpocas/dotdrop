@@ -1,0 +1,29 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  link_dotfile_default: nolink
+  link_on_import: nolink
+  longkey: false
+dotfiles:
+  d_helix:
+    src: config/helix
+    dst: ~/.config/helix
+  d_fish:
+    src: config/fish
+    dst: ~/.config/fish
+  f_starship.toml:
+    src: config/starship.toml
+    dst: ~/.config/starship.toml
+  d_tmux:
+    src: config/tmux
+    dst: ~/.config/tmux
+profiles:
+  TSPNTBTI35:
+    dotfiles:
+    - d_helix
+    - d_fish
+    - f_starship.toml
+    - d_tmux
