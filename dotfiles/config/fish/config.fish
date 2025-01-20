@@ -3,10 +3,10 @@ if status is-interactive
     set -g -x fish_greeting ''
 end
 
-starship init fish | source
 
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
+starship init fish | source # initialize starship
 zoxide init fish | source # initialize zoxide alias 'z'
 mise activate fish | source # initialize mise-en-place alias 'mise'
 
