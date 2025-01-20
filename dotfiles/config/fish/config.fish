@@ -3,18 +3,9 @@ if status is-interactive
     set -g -x fish_greeting ''
 end
 
-
+# load enviroments
+envload ~/.env.secrets
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-starship init fish | source # initialize starship
-zoxide init fish | source # initialize zoxide alias 'z'
-mise activate fish | source # initialize mise-en-place alias 'mise'
-
-function storePathForWindowsTerminal --on-variable PWD
-    if test -n "$WT_SESSION"
-        printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
-    end
-end
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
@@ -22,3 +13,14 @@ set --export PATH $BUN_INSTALL/bin $PATH
 
 # homebrew
 set --export HOMEBREW_NO_AUTO_UPDATE 1
+
+zoxide init fish | source # initialize zoxide alias 'z'
+mise activate fish | source # initialize mise-en-place alias 'mise'
+starship init fish | source # initialize starship
+
+# function to correct initialize wsl and windows terminal 
+function storePathForWindowsTerminal --on-variable PWD
+    if test -n "$WT_SESSION"
+        printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
+    end
+end
