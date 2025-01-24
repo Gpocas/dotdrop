@@ -1,14 +1,12 @@
 [[language]]
 name = "python"
-language-servers = ["pyright", "ruff", "pylyzer"]
+language-servers = [ "pyright", "ruff" ]
 
 [language-server.pyright.config.python.analysis]
 typeCheckingMode = "basic"
 
+# if you choose `ruff-lsp`
 [language-server.ruff]
-command = "ruff"
-args = ["server"]
-
-[language-server.pylyzer]
-command = "pylyzer"
-args = ["--server"]
+command = "ruff-lsp"
+[language-server.ruff.config.settings]
+args = ["--ignore", "E501"]
