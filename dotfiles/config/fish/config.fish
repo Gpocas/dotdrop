@@ -14,6 +14,9 @@ set --export PATH $BUN_INSTALL/bin $PATH
 # homebrew
 set --export HOMEBREW_NO_AUTO_UPDATE 1
 
+# rust
+source "$HOME/.cargo/env.fish"
+
 zoxide init fish | source # initialize zoxide alias 'z'
 mise activate fish | source # initialize mise-en-place alias 'mise'
 starship init fish | source # initialize starship
