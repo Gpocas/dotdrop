@@ -6,8 +6,9 @@ cursorline = true
 color-modes = true
 true-color = true
 gutters =["diff","diagnostics", "line-numbers", "spacer"]
-line-number = "relative"
-mouse = false
+line-number = "absolute"
+mouse = true
+text-width = 79
 
 [editor.statusline]
 left = ["mode", "spinner"]

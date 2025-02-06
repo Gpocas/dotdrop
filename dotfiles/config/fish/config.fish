@@ -4,7 +4,7 @@ if status is-interactive
 end
 
 # load enviroments
-envload ~/.env.secrets
+# envload ~/.env.secrets
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # bun
