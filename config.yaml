@@ -23,6 +23,9 @@ dotfiles:
   d_mise:
     src: config/mise
     dst: ~/.config/mise
+  d_nvim:
+    src: config/nvim
+    dst: ~/.config/nvim
 profiles:
   default:
     dotfiles:
@@ -31,3 +34,4 @@ profiles:
     - f_starship.toml
     - d_tmux
     - d_mise
+    - d_nvim
