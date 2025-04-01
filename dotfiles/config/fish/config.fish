@@ -4,7 +4,7 @@ if status is-interactive
 end
 
 # load enviroments
-# envload ~/.env.secrets
+envload ~/.env.secrets
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # bun
@@ -20,6 +20,10 @@ source "$HOME/.cargo/env.fish"
 zoxide init fish | source # initialize zoxide alias 'z'
 mise activate fish | source # initialize mise-en-place alias 'mise'
 starship init fish | source # initialize starship
+
+# alias
+alias dotdrop="dotdrop -p default -c '$HOME/.dotdrop/config.yaml'"
+
 
 # function to correct initialize wsl and windows terminal 
 function storePathForWindowsTerminal --on-variable PWD
