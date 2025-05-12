@@ -36,7 +36,7 @@ starship init fish | source # initialize starship
 
 # alias
 alias dotdrop="dotdrop -p default -c '$HOME/.dotdrop/config.yaml'"
-
+alias lt="eza -T"
 
 # function to correct initialize wsl and windows terminal 
 function storePathForWindowsTerminal --on-variable PWD
