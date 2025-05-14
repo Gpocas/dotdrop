@@ -35,7 +35,7 @@ zoxide init fish | source # initialize zoxide alias 'z'
 starship init fish | source # initialize starship
 
 # alias
-alias dotdrop="dotdrop -p default -c '$HOME/.dotdrop/config.yaml'"
+alias dotdrop="git pull origin main > /dev/null && dotdrop -p default -c '$HOME/.dotdrop/config.yaml'"
 alias lt="eza -T"
 
 # function to correct initialize wsl and windows terminal 
