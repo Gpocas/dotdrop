@@ -26,6 +26,9 @@ dotfiles:
   d_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
 profiles:
   default:
     dotfiles:
@@ -35,3 +38,4 @@ profiles:
     - d_tmux
     - d_mise
     - d_nvim
+    - f_gitconfig
