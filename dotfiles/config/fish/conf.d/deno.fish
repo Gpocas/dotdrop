@@ -1,0 +1,1 @@
+source "/home/gpocas/.deno/env.fish"
