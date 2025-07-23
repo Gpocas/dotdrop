@@ -1,1 +1,1 @@
-source "/home/gpocas/.deno/env.fish"
+source "/home/guilherme/.deno/env.fish"
