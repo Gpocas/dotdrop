@@ -29,6 +29,9 @@ dotfiles:
   f_gitconfig:
     src: gitconfig
     dst: ~/.gitconfig
+  f_zshrc:
+    src: zshrc
+    dst: ~/.zshrc
 profiles:
   default:
     dotfiles:
@@ -39,3 +42,4 @@ profiles:
     - d_mise
     - d_nvim
     - f_gitconfig
+    - f_zshrc
