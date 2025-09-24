@@ -1,6 +1,0 @@
-[tools]
-node = "22"
-python = "3.12"
-
-
-# if you experience issues with this python (e.g.: running poetry), switch to python-build by running mise settings python.compile=1
