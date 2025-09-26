@@ -11,9 +11,6 @@ dotfiles:
   d_helix:
     src: config/helix
     dst: ~/.config/helix
-  d_fish:
-    src: config/fish
-    dst: ~/.config/fish
   f_starship.toml:
     src: config/starship.toml
     dst: ~/.config/starship.toml
@@ -33,7 +30,6 @@ profiles:
   default:
     dotfiles:
     - d_helix
-    - d_fish
     - f_starship.toml
     - d_tmux
     - d_nvim
