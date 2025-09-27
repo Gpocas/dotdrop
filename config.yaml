@@ -17,9 +17,6 @@ dotfiles:
   d_tmux:
     src: config/tmux
     dst: ~/.config/tmux
-  d_nvim:
-    src: config/nvim
-    dst: ~/.config/nvim
   f_gitconfig:
     src: gitconfig
     dst: ~/.gitconfig
@@ -32,6 +29,5 @@ profiles:
     - d_helix
     - f_starship.toml
     - d_tmux
-    - d_nvim
     - f_gitconfig
     - f_zshrc
