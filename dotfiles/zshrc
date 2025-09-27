@@ -70,24 +70,6 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-# homebrew
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-# asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# bun
-export PATH="${HOME}/.bun/bin:$PATH"
-
-# rust (cargo)
-source $HOME/.cargo/env
-
-# local/bin
-export PATH="${HOME}/.local/bin:$PATH"
-
-
 plugins=(
   git 
   gcloud
@@ -126,6 +108,22 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# homebrew
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# bun
+export PATH="${HOME}/.bun/bin:$PATH"
+
+# rust (cargo)
+source $HOME/.cargo/env
+
+# local/bin
+export PATH="${HOME}/.local/bin:$PATH"
 
 # alias
 alias dotdrop="dotdrop -p default -c '${HOME}/.dotdrop/config.yaml'"
