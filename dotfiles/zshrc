@@ -128,3 +128,13 @@ export PATH="${HOME}/.local/bin:$PATH"
 # alias
 alias dotdrop="dotdrop -p default -c '${HOME}/.dotdrop/config.yaml'"
 alias lt="eza -laT"
+
+
+# Inicia tmux automaticamente, se ainda não estiver dentro de uma sessão
+if command -v tmux >/dev/null 2>&1; then
+  # Não iniciar dentro de tmux nem em sessões SSH sem tela
+  if [ -z "$TMUX" ] && [ -z "$SSH_TTY" ]; then
+    exec tmux new-session -A -s main
+  fi
+fi
+
