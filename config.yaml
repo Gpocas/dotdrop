@@ -26,6 +26,9 @@ dotfiles:
   d_nvim:
     src: config/nvim
     dst: ~/.config/nvim
+  d_oh-my-zsh:
+    src: oh-my-zsh
+    dst: ~/.oh-my-zsh
 profiles:
   default:
     dotfiles:
@@ -35,3 +38,4 @@ profiles:
     - f_gitconfig
     - f_zshrc
     - d_nvim
+    - d_oh-my-zsh
