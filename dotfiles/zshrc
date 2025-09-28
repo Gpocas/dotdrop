@@ -70,9 +70,26 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+# homebrew
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# bun
+export PATH="${HOME}/.bun/bin:$PATH"
+
+# rust (cargo)
+source $HOME/.cargo/env
+
+# local/bin
+export PATH="${HOME}/.local/bin:$PATH"
+
+
 plugins=(
-  git 
-  gcloud
+  git
   zoxide
   starship
   zsh-syntax-highlighting
@@ -82,10 +99,18 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# alias
+alias lt="eza -laT"
+
+# dotdrop
+export DOTREPO="${HOME}/.dotdrop"
+alias dotdrop="dotdrop -p default -c '${DOTREPO}/config.yaml'"
+alias dotsync="cd $DOTREPO && git pull >> /dev/null && dotdrop update -f"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -108,33 +133,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# homebrew
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-export HOMEBREW_NO_AUTO_UPDATE=1
-
-# asdf
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# bun
-export PATH="${HOME}/.bun/bin:$PATH"
-
-# rust (cargo)
-source $HOME/.cargo/env
-
-# local/bin
-export PATH="${HOME}/.local/bin:$PATH"
-
-# alias
-alias dotdrop="dotdrop -p default -c '${HOME}/.dotdrop/config.yaml'"
-alias lt="eza -laT"
-
-
-# Inicia tmux automaticamente, se ainda não estiver dentro de uma sessão
-if command -v tmux >/dev/null 2>&1; then
-  # Não iniciar dentro de tmux nem em sessões SSH sem tela
-  if [ -z "$TMUX" ] && [ -z "$SSH_TTY" ]; then
-    exec tmux new-session
-  fi
-fi
 
