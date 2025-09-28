@@ -105,7 +105,7 @@ alias lt="eza -laT"
 # dotdrop
 export DOTREPO="${HOME}/.dotdrop"
 alias dotdrop="dotdrop -p default -c '${DOTREPO}/config.yaml'"
-alias dotsync="cd $DOTREPO && git pull >> /dev/null && dotdrop update -f"
+alias dotsync="cd $DOTREPO && git pull && dotdrop update -f"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
