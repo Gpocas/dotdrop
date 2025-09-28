@@ -134,7 +134,7 @@ alias lt="eza -laT"
 if command -v tmux >/dev/null 2>&1; then
   # Não iniciar dentro de tmux nem em sessões SSH sem tela
   if [ -z "$TMUX" ] && [ -z "$SSH_TTY" ]; then
-    exec tmux new-session -A -s main
+    exec tmux new-session
   fi
 fi
 
