@@ -23,9 +23,6 @@ dotfiles:
   f_zshrc:
     src: zshrc
     dst: ~/.zshrc
-  d_nvim:
-    src: config/nvim
-    dst: ~/.config/nvim
   d_oh-my-zsh:
     src: oh-my-zsh
     dst: ~/.oh-my-zsh
@@ -37,5 +34,4 @@ profiles:
     - d_tmux
     - f_gitconfig
     - f_zshrc
-    - d_nvim
     - d_oh-my-zsh
