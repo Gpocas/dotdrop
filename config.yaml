@@ -26,9 +26,6 @@ dotfiles:
   d_oh-my-zsh:
     src: oh-my-zsh
     dst: ~/.oh-my-zsh
-  d_custom:
-    src: oh-my-zsh/custom
-    dst: ~/.oh-my-zsh/custom
 profiles:
   default:
     dotfiles:
@@ -38,4 +35,3 @@ profiles:
     - f_gitconfig
     - f_zshrc
     - d_oh-my-zsh
-    - d_custom
