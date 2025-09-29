@@ -32,6 +32,13 @@ max-wrap = 25 # increase value to reduce forced mid-word wrapping
 max-indent-retain = 0
 wrap-indicator = ""  # set wrap-indicator to "" to hide it
 
+
+[keys.select]
+"o" = "flip_selections"
+
 [keys.normal]
 C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+
+[editor.cursor-shape]
+insert = "bar"
