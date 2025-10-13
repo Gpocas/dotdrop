@@ -91,7 +91,6 @@ export PATH="${HOME}/.local/bin:$PATH"
 plugins=(
   git
   zoxide
-  starship
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
