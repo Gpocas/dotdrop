@@ -94,7 +94,6 @@ source $HOME/.cargo/env
 # local/bin
 export PATH="${HOME}/.local/bin:$PATH"
 
-
 plugins=(
   git
   zoxide
