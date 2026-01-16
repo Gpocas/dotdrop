@@ -105,6 +105,9 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# time format
+export TIMEFMT=$'%J\n%U user\n%S system\n%P cpu\n%*E total'
+
 # alias
 alias lt="eza -laT"
 
