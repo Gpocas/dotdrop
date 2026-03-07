@@ -109,7 +109,7 @@ source $ZSH/oh-my-zsh.sh
 export TIMEFMT=$'%J\n%U user\n%S system\n%P cpu\n%*E total'
 
 # alias
-alias lt="eza -laT"
+alias lt="eza -T"
 
 # dotdrop
 export DOTREPO="${HOME}/.dotdrop"
@@ -157,3 +157,6 @@ zle -N hstr_no_tiocsti
 bindkey '\C-r' hstr_no_tiocsti
 export HSTR_TIOCSTI=n
 
+
+# bun completions
+[ -s "/home/gpocas/.bun/_bun" ] && source "/home/gpocas/.bun/_bun"
