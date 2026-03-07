@@ -110,6 +110,7 @@ export TIMEFMT=$'%J\n%U user\n%S system\n%P cpu\n%*E total'
 
 # alias
 alias lt="eza -T"
+alias cat="bat"
 
 # dotdrop
 export DOTREPO="${HOME}/.dotdrop"
