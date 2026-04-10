@@ -29,6 +29,9 @@ dotfiles:
   f_p10k.zsh:
     src: p10k.zsh
     dst: ~/.p10k.zsh
+  f_settings.json:
+    src: claude/settings.json
+    dst: ~/.claude/settings.json
 profiles:
   default:
     dotfiles:
@@ -39,3 +42,4 @@ profiles:
     - f_zshrc
     - d_oh-my-zsh
     - f_p10k.zsh
+    - f_settings.json
