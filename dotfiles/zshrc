@@ -161,3 +161,6 @@ export HSTR_TIOCSTI=n
 
 # bun completions
 [ -s "/home/gpocas/.bun/_bun" ] && source "/home/gpocas/.bun/_bun"
+
+# custom scripts
+for f in ~/.zsh/scripts/*.zsh(N); do source "$f"; done

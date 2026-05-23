@@ -1,20 +1,3 @@
 {
-  "enabledPlugins": {
-    "context7-plugin@context7-marketplace": true,
-    "mempalace@mempalace": true
-  },
-  "extraKnownMarketplaces": {
-    "context7-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "upstash/context7"
-      }
-    },
-    "mempalace": {
-      "source": {
-        "source": "github",
-        "repo": "milla-jovovich/mempalace"
-      }
-    }
-  }
+  "theme": "dark"
 }
