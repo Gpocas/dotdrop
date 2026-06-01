@@ -7,17 +7,6 @@
             }
         }
     },
-    "mcpServers": {
-        "inkdrop": {
-            "command": "npx",
-            "args": ["-y", "@inkdropapp/mcp-server"],
-            "env": {
-                "INKDROP_LOCAL_SERVER_URL": "http://localhost:19840",
-                "INKDROP_LOCAL_USERNAME": "foo",
-                "INKDROP_LOCAL_PASSWORD": "bar"
-            }
-        }
-    },
     "theme": "dark",
     "enabledPlugins": {
         "mempalace@mempalace": true
