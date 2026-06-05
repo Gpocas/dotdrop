@@ -35,6 +35,10 @@ dotfiles:
   d_zsh:
     src: zsh
     dst: ~/.zsh
+  f_claude.json:
+    src: claude.json
+    dst: ~/.claude.json
+    chmod: '600'
 profiles:
   default:
     dotfiles:
@@ -47,3 +51,4 @@ profiles:
     - f_p10k.zsh
     - f_settings.json
     - d_zsh
+    - f_claude.json
