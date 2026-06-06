@@ -18,7 +18,7 @@
   conflictstyle = zdiff3
 
 [core]
-	editor = hx
+	editor = babi
 
 [alias]
  adog = log --all --decorate --oneline --graph
