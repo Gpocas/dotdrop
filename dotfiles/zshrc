@@ -119,6 +119,8 @@ alias dotgit="git -C $DOTREPO"
 alias dotsync="dotgit pull && dotdrop install -f"
 alias dotpush="dotgit pull && dotdrop update -f && dotgit add -A && dotgit commit && dotgit push"
 
+# editor
+export EDITOR=babi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
