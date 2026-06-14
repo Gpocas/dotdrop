@@ -1,14 +1,15 @@
 {
-    "extraKnownMarketplaces": {
-        "mempalace": {
-            "source": {
-                "source": "github",
-                "repo": "MemPalace/mempalace"
-            }
-        }
-    },
-    "theme": "dark",
-    "enabledPlugins": {
-        "mempalace@mempalace": true
+  "enabledPlugins": {
+    "mempalace@mempalace": true
+  },
+  "extraKnownMarketplaces": {
+    "mempalace": {
+      "source": {
+        "source": "github",
+        "repo": "MemPalace/mempalace"
+      }
     }
+  },
+  "theme": "dark",
+  "model": "opus[1m]"
 }
