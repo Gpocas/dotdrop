@@ -35,10 +35,6 @@ dotfiles:
   d_zsh:
     src: zsh
     dst: ~/.zsh
-  f_claude.json:
-    src: claude.json
-    dst: ~/.claude.json
-    chmod: '600'
   d_skills:
     src: agents/skills
     dst: ~/.agents/skills
@@ -54,5 +50,4 @@ profiles:
     - f_p10k.zsh
     - f_settings.json
     - d_zsh
-    - f_claude.json
     - d_skills
