@@ -1,6 +1,19 @@
 {
+  "model": "sonnet",
   "enabledPlugins": {
-    "mempalace@mempalace": true
+    "frontend-design@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "claude-md-management@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "plugin-dev@claude-plugins-official": true,
+    "playground@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "remember@claude-plugins-official": true,
+    "mempalace@mempalace": true,
+    "nextjs-config-skills@nextjs-config-skills": true
   },
   "extraKnownMarketplaces": {
     "mempalace": {
@@ -8,8 +21,20 @@
         "source": "github",
         "repo": "MemPalace/mempalace"
       }
+    },
+    "nextjs-config-skills": {
+      "source": {
+        "source": "github",
+        "repo": "gpocas/nextjs-config-skills"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
     }
   },
-  "theme": "dark",
-  "model": "opus[1m]"
+  "tui": "fullscreen",
+  "theme": "dark"
 }
