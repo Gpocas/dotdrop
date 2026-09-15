@@ -12,20 +12,13 @@
     "playground@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
     "remember@claude-plugins-official": true,
-    "mempalace@mempalace": true,
-    "nextjs-config-skills@nextjs-config-skills": true
+    "mempalace@mempalace": true
   },
   "extraKnownMarketplaces": {
     "mempalace": {
       "source": {
         "source": "github",
         "repo": "MemPalace/mempalace"
-      }
-    },
-    "nextjs-config-skills": {
-      "source": {
-        "source": "github",
-        "repo": "gpocas/nextjs-config-skills"
       }
     },
     "karpathy-skills": {
