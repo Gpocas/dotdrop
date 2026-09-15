@@ -13,14 +13,7 @@
     "hookify@claude-plugins-official": true,
     "remember@claude-plugins-official": true
   },
-  "extraKnownMarketplaces": {
-    "karpathy-skills": {
-      "source": {
-        "source": "github",
-        "repo": "forrestchang/andrej-karpathy-skills"
-      }
-    }
-  },
+  "extraKnownMarketplaces": {},
   "tui": "fullscreen",
   "theme": "dark"
 }
