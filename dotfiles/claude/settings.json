@@ -11,16 +11,9 @@
     "plugin-dev@claude-plugins-official": true,
     "playground@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
-    "remember@claude-plugins-official": true,
-    "mempalace@mempalace": true
+    "remember@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "mempalace": {
-      "source": {
-        "source": "github",
-        "repo": "MemPalace/mempalace"
-      }
-    },
     "karpathy-skills": {
       "source": {
         "source": "github",
