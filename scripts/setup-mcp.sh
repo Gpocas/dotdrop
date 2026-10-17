@@ -5,7 +5,9 @@
 # Uso:
 #   ./scripts/setup-mcp.sh
 #
-# Servers configurados: inkdrop, axiom, jaylog, ai-memory.
+# Servers configurados: inkdrop, axiom, jaylog, ai-memory (Claude Code e opencode).
+# Para o opencode, os mesmos servers sao gravados em ~/.config/opencode/opencode.jsonc
+# (chave "mcp"), reaproveitando os valores acima.
 #
 # Os valores vem de scripts/secrets/<server>.env (nao versionados - veja os
 # arquivos .env.example). Se o arquivo nao existir, pede os valores
@@ -98,3 +100,67 @@ AI_MEMORY_BIN="${AI_MEMORY_BIN:-$HOME/.local/bin/ai-memory}"
   --server-url "$AI_MEMORY_URL" --auth-token "$AI_MEMORY_TOKEN" --apply >/dev/null
 
 echo "MCP e hooks ai-memory configurados (reinicie o Claude Code)."
+
+# --- opencode ---
+# Escreve os mesmos MCPs em ~/.config/opencode/opencode.jsonc (preserva outras chaves).
+OPENCODE_CONFIG="${OPENCODE_CONFIG:-$HOME/.config/opencode/opencode.jsonc}"
+mkdir -p "$(dirname "$OPENCODE_CONFIG")"
+
+INKDROP_LOCAL_SERVER_URL="$INKDROP_LOCAL_SERVER_URL" \
+INKDROP_LOCAL_USERNAME="$INKDROP_LOCAL_USERNAME" \
+INKDROP_LOCAL_PASSWORD="$INKDROP_LOCAL_PASSWORD" \
+JAYLOG_URL="$JAYLOG_URL" \
+AI_MEMORY_URL="$AI_MEMORY_URL" \
+AI_MEMORY_TOKEN="$AI_MEMORY_TOKEN" \
+python3 - "$OPENCODE_CONFIG" <<'PY'
+import json, os, re, sys
+
+path = sys.argv[1]
+cfg = {"$schema": "https://opencode.ai/config.json"}
+if os.path.exists(path):
+    raw = open(path).read()
+    # jsonc: remove comentarios de linha inteira e virgulas finais
+    raw = re.sub(r"^\s*//.*$", "", raw, flags=re.M)
+    raw = re.sub(r",(\s*[}\]])", r"\1", raw)
+    cfg.update(json.loads(raw))
+
+e = os.environ
+cfg.setdefault("mcp", {}).update({
+    "inkdrop": {
+        "type": "local",
+        "command": ["npx", "-y", "@inkdropapp/mcp-server"],
+        "enabled": True,
+        "environment": {
+            "INKDROP_LOCAL_SERVER_URL": e["INKDROP_LOCAL_SERVER_URL"],
+            "INKDROP_LOCAL_USERNAME": e["INKDROP_LOCAL_USERNAME"],
+            "INKDROP_LOCAL_PASSWORD": e["INKDROP_LOCAL_PASSWORD"],
+        },
+    },
+    "axiom": {
+        "type": "local",
+        "command": ["npx", "-y", "mcp-remote", "https://mcp.axiom.co/mcp"],
+        "enabled": True,
+    },
+    "jaylog": {
+        "type": "local",
+        "command": ["npx", "-y", "jaylog-mcp"],
+        "enabled": True,
+        "environment": {"JAYLOG_URL": e["JAYLOG_URL"]},
+    },
+    "ai-memory": {
+        "type": "remote",
+        "url": e["AI_MEMORY_URL"].rstrip("/") + "/mcp",
+        "enabled": True,
+        "headers": {"Authorization": "Bearer " + e["AI_MEMORY_TOKEN"]},
+    },
+})
+# remove entrada antiga com nome diferente
+cfg["mcp"].pop("inkdrop-mcp-server", None)
+
+with open(path, "w") as f:
+    json.dump(cfg, f, indent=2)
+    f.write("\n")
+os.chmod(path, 0o600)
+PY
+
+echo "MCPs configurados no opencode ($OPENCODE_CONFIG)."
