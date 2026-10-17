@@ -75,7 +75,7 @@ $SSH --command "sudo systemctl start aimemory-backup.service"   # backup manual
 gcloud storage ls -l gs://wireguard-492111-aimemory-backups/
 ```
 - **Atualizar versao:** troque a tag em `docker-compose.yml`, rode `./deploy-files.sh`, confira o health.
-- **Ativar/trocar Gemini:** edite `.env.production` na VM e `sudo docker compose up -d --force-recreate ai-memory`.
+- **Ativar/trocar Gemini:** modelo atual `gemini-3.8-flash` (`AI_MEMORY_LLM_MODEL`); edite `.env.production` na VM e `sudo docker compose up -d --force-recreate ai-memory`.
 - **Restore:** baixe `ai-memory-<ts>.tar.gz`, extraia em um diretorio vazio (`wiki/`, `db/`) e monte em `/data`
   de um container `akitaonrails/ai-memory:<tag>`. O `caddy-<ts>.tar.gz` guarda certificado e conta ACME.
 
