@@ -29,6 +29,7 @@ dotfiles:
   f_settings.json:
     src: claude/settings.json
     dst: ~/.claude/settings.json
+    chmod: '600'
   d_zsh:
     src: zsh
     dst: ~/.zsh

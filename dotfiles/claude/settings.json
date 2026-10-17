@@ -12,5 +12,106 @@
   },
   "extraKnownMarketplaces": {},
   "tui": "fullscreen",
-  "theme": "dark"
+  "theme": "dark",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event session-start --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event user-prompt-submit --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event pre-tool-use --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event post-tool-use --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event pre-compact --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event stop --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event session-end --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event subagent-start --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/gpocas/.local/lib/ai-memory/ai-memory --data-dir /home/gpocas/.local/share/ai-memory hook --event subagent-stop --agent claude-code --server-url https://34-135-252-238.sslip.io"
+          }
+        ]
+      }
+    ]
+  }
 }

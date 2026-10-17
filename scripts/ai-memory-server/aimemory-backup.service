@@ -1,0 +1,6 @@
+[Unit]
+Description=ai-memory backup to GCS
+After=docker.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/aimemory-backup

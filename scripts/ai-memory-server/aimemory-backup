@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+B=gs://wireguard-492111-aimemory-backups
+TS=$(date -u +%Y%m%dT%H%M%SZ)
+TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
+docker exec ai-memory ai-memory backup --to /tmp/ai-memory-$TS.tar.gz
+docker cp ai-memory:/tmp/ai-memory-$TS.tar.gz "$TMP/ai-memory-$TS.tar.gz"
+docker exec ai-memory rm -f /tmp/ai-memory-$TS.tar.gz
+# estado do Caddy (conta ACME + certificados) e configuracao
+docker run --rm -v ai-memory-tls_caddy-data:/d:ro -v /opt/ai-memory:/c:ro alpine \
+  tar czf - -C / d c/Caddyfile c/docker-compose.yml > "$TMP/caddy-$TS.tar.gz"
+gcloud storage cp "$TMP"/ai-memory-$TS.tar.gz "$TMP"/caddy-$TS.tar.gz $B/ --quiet
+echo "backup ok $TS"

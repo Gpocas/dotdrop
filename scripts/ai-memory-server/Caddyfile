@@ -1,0 +1,3 @@
+34-135-252-238.sslip.io {
+    reverse_proxy ai-memory:49374
+}

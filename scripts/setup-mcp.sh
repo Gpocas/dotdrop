@@ -5,7 +5,7 @@
 # Uso:
 #   ./scripts/setup-mcp.sh
 #
-# Servers configurados: inkdrop, axiom, jaylog.
+# Servers configurados: inkdrop, axiom, jaylog, ai-memory.
 #
 # Os valores vem de scripts/secrets/<server>.env (nao versionados - veja os
 # arquivos .env.example). Se o arquivo nao existir, pede os valores
@@ -69,3 +69,32 @@ claude mcp add jaylog -s user \
   -- npx -y jaylog-mcp
 
 echo "MCP jaylog configurado (escopo: user)."
+
+# --- ai-memory (servidor remoto na VM aimemory-vm) ---
+# MCP em ~/.claude.json (token embutido, por isso fora do dotdrop) e hooks em
+# ~/.claude/settings.json (sem segredo: o token fica em ~/.local/share/ai-memory/auth-token).
+# Infra do servidor: scripts/ai-memory-server/README.md
+AI_MEMORY_SECRETS_FILE="$SCRIPT_DIR/secrets/ai-memory.env"
+
+if [ -f "$AI_MEMORY_SECRETS_FILE" ]; then
+  # shellcheck disable=SC1090
+  source "$AI_MEMORY_SECRETS_FILE"
+else
+  echo "Arquivo $AI_MEMORY_SECRETS_FILE nao encontrado, pedindo valores interativamente."
+  read -r -p "AI_MEMORY_URL (ex: https://host.sslip.io): " AI_MEMORY_URL
+  read -r -s -p "AI_MEMORY_TOKEN: " AI_MEMORY_TOKEN
+  echo
+fi
+
+: "${AI_MEMORY_URL:?defina AI_MEMORY_URL}"
+: "${AI_MEMORY_TOKEN:?defina AI_MEMORY_TOKEN}"
+
+"$SCRIPT_DIR/ai-memory-install-cli.sh"
+AI_MEMORY_BIN="${AI_MEMORY_BIN:-$HOME/.local/bin/ai-memory}"
+
+"$AI_MEMORY_BIN" install-mcp --client claude-code \
+  --server-url "$AI_MEMORY_URL" --auth-token "$AI_MEMORY_TOKEN" --apply >/dev/null
+"$AI_MEMORY_BIN" install-hooks --agent claude-code \
+  --server-url "$AI_MEMORY_URL" --auth-token "$AI_MEMORY_TOKEN" --apply >/dev/null
+
+echo "MCP e hooks ai-memory configurados (reinicie o Claude Code)."

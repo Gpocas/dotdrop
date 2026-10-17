@@ -1,3 +1,4 @@
 .vscode
 scripts/secrets/inkdrop.env
 scripts/secrets/jaylog.env
+scripts/secrets/ai-memory.env
