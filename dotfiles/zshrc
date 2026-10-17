@@ -119,6 +119,14 @@ alias dotgit="git -C $DOTREPO"
 alias dotsync="dotgit pull && dotdrop install -f"
 alias dotpush="dotgit pull && dotdrop update -f && dotgit add -A && dotgit commit && dotgit push"
 
+# setup-mcp (script do dotdrop) como comando no PATH
+[[ -L "${HOME}/.local/bin/setup-mcp" ]] || {
+  mkdir -p "${HOME}/.local/bin" &&
+    ln -s "${DOTREPO}/scripts/setup-mcp.py" "${HOME}/.local/bin/setup-mcp"
+}
+alias mcpsync="setup-mcp"
+alias mcpdry="setup-mcp --dry-run"
+
 # editor
 export EDITOR=babi
 
