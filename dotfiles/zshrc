@@ -174,3 +174,6 @@ export HSTR_TIOCSTI=n
 
 # custom scripts
 for f in ~/.zsh/scripts/*.zsh(N); do source "$f"; done
+
+# opencode
+export PATH=/home/gpocas/.opencode/bin:$PATH

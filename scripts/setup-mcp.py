@@ -53,7 +53,7 @@ SERVERS = {
         "env": ["JAYLOG_URL"],
     },
     # Remoto na VM aimemory-vm. No Claude Code e instalado pelo proprio binario
-    # ai-memory (MCP + hooks); o token fica em ~/.claude.json, por isso fora do dotdrop.
+    # ai-memory (MCP + hooks, nos dois clientes); o token fica em ~/.claude.json, por isso fora do dotdrop.
     "ai-memory": {
         "vars": {
             "AI_MEMORY_URL": ("AI_MEMORY_URL (ex: https://host.sslip.io)", False),
@@ -162,11 +162,25 @@ def setup_opencode(all_values: dict, dry_run: bool) -> None:
 
     if dry_run:
         print(f"[dry-run] gravaria {OPENCODE_CONFIG} com MCPs: {', '.join(mcp)}")
-        return
-    OPENCODE_CONFIG.parent.mkdir(parents=True, exist_ok=True)
-    OPENCODE_CONFIG.write_text(json.dumps(cfg, indent=2) + "\n")
-    OPENCODE_CONFIG.chmod(0o600)  # contem o token do ai-memory
-    print(f"MCPs configurados no opencode ({OPENCODE_CONFIG}).")
+    else:
+        OPENCODE_CONFIG.parent.mkdir(parents=True, exist_ok=True)
+        OPENCODE_CONFIG.write_text(json.dumps(cfg, indent=2) + "\n")
+        OPENCODE_CONFIG.chmod(0o600)  # contem o token do ai-memory
+        print(f"MCPs configurados no opencode ({OPENCODE_CONFIG}).")
+    setup_opencode_ai_memory_hooks(all_values["ai-memory"], dry_run)
+
+
+def setup_opencode_ai_memory_hooks(values: dict, dry_run: bool) -> None:
+    # O MCP so da ferramentas sob demanda; a captura automatica de sessoes vem do
+    # plugin em ~/.config/opencode/plugins/ (sem ele nada e gravado sozinho).
+    run([str(SCRIPT_DIR / "ai-memory-install-cli.sh")], dry_run)
+    run(
+        [str(AI_MEMORY_BIN), "install-hooks", "--agent", "open-code",
+         "--server-url", values["AI_MEMORY_URL"], "--auth-token", values["AI_MEMORY_TOKEN"], "--apply"],
+        dry_run, quiet=True,
+    )
+    if not dry_run:
+        print("Hooks ai-memory instalados no opencode (reinicie o opencode).")
 
 
 def main() -> None:
