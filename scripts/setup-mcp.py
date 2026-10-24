@@ -135,14 +135,15 @@ def setup_claude_ai_memory(values: dict, dry_run: bool) -> None:
 
 
 def opencode_entry(spec: dict, values: dict) -> dict:
+    # Schema atual do opencode (mcp.servers): sem "enabled" (padrao ligado; o
+    # inverso e "disabled") e sem chaves extras.
     if "url" in spec:
         return {
             "type": "remote",
             "url": spec["url"](values),
-            "enabled": True,
             "headers": spec["headers"](values),
         }
-    entry = {"type": "local", "command": spec["command"], "enabled": True}
+    entry = {"type": "local", "command": spec["command"]}
     if spec["env"]:
         entry["environment"] = {var: values[var] for var in spec["env"]}
     return entry
@@ -155,14 +156,28 @@ def load_jsonc(path: Path) -> dict:
     return json.loads(raw)
 
 
+def migrate_mcp_servers(cfg: dict) -> dict:
+    """Garante cfg["mcp"]["servers"] e move para la os servers do formato antigo
+    (cfg["mcp"][nome], hoje deprecated), trocando enabled:false por disabled:true."""
+    mcp = cfg.setdefault("mcp", {})
+    servers = mcp.setdefault("servers", {})
+    for name in [k for k, v in mcp.items() if k not in ("servers", "timeout") and isinstance(v, dict) and "type" in v]:
+        entry = mcp.pop(name)
+        if entry.pop("enabled", True) is False:
+            entry["disabled"] = True
+        servers.setdefault(name, entry)
+    return mcp
+
+
 def setup_opencode(all_values: dict, dry_run: bool) -> None:
     cfg = {"$schema": "https://opencode.ai/config.json"}
     if OPENCODE_CONFIG.exists():
         cfg.update(load_jsonc(OPENCODE_CONFIG))
-    mcp = cfg.setdefault("mcp", {})
+    mcp = migrate_mcp_servers(cfg)
+    servers = mcp["servers"]
     for name, spec in SERVERS.items():
-        mcp[name] = opencode_entry(spec, all_values[name])
-    mcp.pop("inkdrop-mcp-server", None)  # nome antigo
+        servers[name] = opencode_entry(spec, all_values[name])
+    servers.pop("inkdrop-mcp-server", None)  # nome antigo
 
     if dry_run:
         print(f"[dry-run] gravaria {OPENCODE_CONFIG} com MCPs: {', '.join(mcp)}")
