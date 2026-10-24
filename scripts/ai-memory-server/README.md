@@ -79,6 +79,19 @@ gcloud storage ls -l gs://wireguard-492111-aimemory-backups/
 - **Restore:** baixe `ai-memory-<ts>.tar.gz`, extraia em um diretorio vazio (`wiki/`, `db/`) e monte em `/data`
   de um container `akitaonrails/ai-memory:<tag>`. O `caddy-<ts>.tar.gz` guarda certificado e conta ACME.
 
+## Captura (cliente)
+- Hooks do Claude Code com `--project-strategy repo-root --capture-mode allowlist --capture-assistant`
+  (em `dotfiles/claude/settings.json`; `setup-mcp.py` reaplica as mesmas flags).
+- **Allowlist:** so repositorios com `.ai-memory.toml` na raiz emitem eventos. Para incluir um repo,
+  crie `workspace = "default"` nesse arquivo (o nome do projeto continua vindo do remote git).
+  Sessoes em `~` ou em repos sem marker nao sao capturadas; o MCP continua disponivel para consulta.
+- **Embeddings:** `AI_MEMORY_EMBEDDING_PROVIDER=gemini` (`gemini-embedding-001`, 768 dim). Ao ligar em
+  uma base existente, rode `ai-memory embed --workspace default --project <p>` por projeto
+  (`ai-memory list-projects` lista os nomes; paginas ja indexadas sao puladas).
+- **Fila de hooks:** os eventos vao primeiro para `~/.local/share/ai-memory/hook-spool` e sao entregues em
+  `session-start`, `stop`, `pre-compact` e `session-end`. Fila cheia durante a sessao e normal; para
+  esvaziar na hora: `AI_MEMORY_SERVER_URL=<url> ai-memory recover`.
+
 ## Limitacoes conhecidas
 - O backup cobre `wiki/`, `db/` e config; o `raw/` (ledger de observacoes) nao entra.
 - Parar a VM (ex.: trocar service account) tira o servico do ar por 1-2 min.

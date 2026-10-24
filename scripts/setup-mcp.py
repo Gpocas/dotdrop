@@ -29,6 +29,10 @@ OPENCODE_CONFIG = Path(
     os.environ.get("OPENCODE_CONFIG", Path.home() / ".config/opencode/opencode.jsonc")
 )
 AI_MEMORY_BIN = Path(os.environ.get("AI_MEMORY_BIN", Path.home() / ".local/bin/ai-memory"))
+# Politica de captura dos hooks: projeto pela raiz do repo, so captura repos com
+# .ai-memory.toml (allowlist) e inclui o trecho final da resposta do assistente
+# (o servidor precisa de AI_MEMORY_CAPTURE_ASSISTANT=true).
+HOOK_CAPTURE_FLAGS = ["--project-strategy", "repo-root", "--capture-mode", "allowlist", "--capture-assistant"]
 
 # Cada server: variaveis necessarias (nome -> (prompt, secreta?)), e o comando
 # local ou a URL remota. "env" lista quais variaveis vao para o ambiente do server.
@@ -125,7 +129,7 @@ def setup_claude_ai_memory(values: dict, dry_run: bool) -> None:
     run([str(SCRIPT_DIR / "ai-memory-install-cli.sh")], dry_run)
     common = ["--server-url", values["AI_MEMORY_URL"], "--auth-token", values["AI_MEMORY_TOKEN"], "--apply"]
     run([str(AI_MEMORY_BIN), "install-mcp", "--client", "claude-code", *common], dry_run, quiet=True)
-    run([str(AI_MEMORY_BIN), "install-hooks", "--agent", "claude-code", *common], dry_run, quiet=True)
+    run([str(AI_MEMORY_BIN), "install-hooks", "--agent", "claude-code", *common, *HOOK_CAPTURE_FLAGS], dry_run, quiet=True)
     if not dry_run:
         print("MCP e hooks ai-memory configurados (reinicie o Claude Code).")
 
@@ -176,7 +180,8 @@ def setup_opencode_ai_memory_hooks(values: dict, dry_run: bool) -> None:
     run([str(SCRIPT_DIR / "ai-memory-install-cli.sh")], dry_run)
     run(
         [str(AI_MEMORY_BIN), "install-hooks", "--agent", "open-code",
-         "--server-url", values["AI_MEMORY_URL"], "--auth-token", values["AI_MEMORY_TOKEN"], "--apply"],
+         "--server-url", values["AI_MEMORY_URL"], "--auth-token", values["AI_MEMORY_TOKEN"], "--apply",
+         *HOOK_CAPTURE_FLAGS],
         dry_run, quiet=True,
     )
     if not dry_run:
