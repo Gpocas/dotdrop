@@ -163,7 +163,16 @@ for f in ~/.zsh/scripts/*.zsh(N); do source "$f"; done
 export PATH=/home/gpocas/.opencode/bin:$PATH
 
 # open-history (HSTR) configuration - add this to ~/.zshrc
-alias hh=open-history                    # hh to be alias for open-history
+# hh: opens open-history and places the chosen command in the next prompt via `print -z`
+# (works even when the kernel blocks TIOCSTI, i.e. dev.tty.legacy_tiocsti=0)
+unalias hh 2>/dev/null
+function hh {
+    local HSTR_OUT
+    { HSTR_OUT="$( { </dev/tty open-history "$@"; } 2>&1 1>&3 3>&- )"; } 3>&1;
+    if [ -n "${HSTR_OUT}" ]; then
+        print -z -- "${HSTR_OUT}"
+    fi
+}
 setopt histignorespace           # skip cmds w/ leading space from history
 export HSTR_CONFIG=hicolor       # get more colors
 hstr_no_tiocsti() {
@@ -177,5 +186,5 @@ hstr_no_tiocsti() {
 }
 zle -N hstr_no_tiocsti
 bindkey '\C-r' hstr_no_tiocsti
-export HSTR_TIOCSTI=y
+export HSTR_TIOCSTI=n
 
