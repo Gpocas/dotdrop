@@ -111,6 +111,7 @@ export TIMEFMT=$'%J\n%U user\n%S system\n%P cpu\n%*E total'
 # alias
 alias lt="eza -T"
 alias cat="bat"
+alias claude-vertex='CLAUDE_CODE_USE_VERTEX=1 ANTHROPIC_VERTEX_PROJECT_ID="wireguard-492111" CLOUD_ML_REGION="global" ANTHROPIC_MODEL="claude-opus-5-5" ANTHROPIC_DEFAULT_OPUS_MODEL="claude-opus-5-5" claude'
 
 # dotdrop
 export DOTREPO="${HOME}/.dotdrop"
